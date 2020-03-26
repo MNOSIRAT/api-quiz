@@ -54,14 +54,14 @@ Class Diagram that represents the cms controllers, services and repositories:
 
 
 Class Diagram that represents the Entities
-![Entiies Diagram](images/Package entities.png)
+![Entiies Diagram](https://github.com/MNOSIRAT/api-quiz/blob/master/images/Package%20entities.png)
 
 
 Class Diagram that represents the Dtos
-![Dto Diagram](images/Package dtos.png)
+![Dto Diagram](https://github.com/MNOSIRAT/api-quiz/blob/master/images/Package%20dtos.png)
 
 Class Diagram that represents the InputValidation mechanism
-![InputValidation Diagram](images/Package inputValidation.png)
+![InputValidation Diagram](https://github.com/MNOSIRAT/api-quiz/blob/master/images/Package%20inputValidation.png)
 
 
 

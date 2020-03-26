@@ -54,15 +54,15 @@ you can run the app as
 
 ## UML diagrams
 
-####Class Diagram that represents the cms controllers, services and repositories:
+Class Diagram that represents the cms controllers, services and repositories:
 ![cms Diagram](https://github.com/MNOSIRAT/api-quiz/blob/master/images/Package%20cms.png)
 ----------------------------------------
 
-####Class Diagram that represents the Entities
+Class Diagram that represents the Entities
 ![Entiies Diagram](https://github.com/MNOSIRAT/api-quiz/blob/master/images/Package%20entities.png)
 ----------------------------------------
 
-####Class Diagram that represents the Dtos
+Class Diagram that represents the Dtos
 ![Dto Diagram](https://github.com/MNOSIRAT/api-quiz/blob/master/images/Package%20dtos.png)
 ----------------------------------------
 Class Diagram that represents the InputValidation mechanism

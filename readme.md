@@ -50,7 +50,7 @@ you can run the test as
 ## UML diagrams
 
 Class Diagram that represents the cms controllers, services and repositories:
-![cms Diagram](images/Package cms.png)
+![cms Diagram](https://github.com/MNOSIRAT/api-quiz/blob/master/images/Package%20cms.png)
 
 
 Class Diagram that represents the Entities

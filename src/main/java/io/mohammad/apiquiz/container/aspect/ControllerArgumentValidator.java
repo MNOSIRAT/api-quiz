@@ -14,7 +14,6 @@ public class ControllerArgumentValidator {
     public ControllerArgumentValidator() {
     }
 
-
     @Around("within(@org.springframework.web.bind.annotation.RestController *))")
     public Object validate(ProceedingJoinPoint point) throws Throwable {
         Object[] args = point.getArgs();
@@ -27,7 +26,6 @@ public class ControllerArgumentValidator {
                 ((BaseRequestDTO)arg).validate();
             }
         }
-
         return point.proceed();
     }
 }

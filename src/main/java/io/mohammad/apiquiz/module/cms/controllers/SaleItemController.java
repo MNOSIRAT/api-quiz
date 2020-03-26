@@ -13,7 +13,7 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "/api/saleitems")
+@RequestMapping(path = "/api/v1/saleitems")
 public class SaleItemController {
     private final SaleItemService saleItemService;
 

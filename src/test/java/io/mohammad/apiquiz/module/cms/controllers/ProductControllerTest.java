@@ -41,7 +41,7 @@ public class ProductControllerTest {
     private ProductRepository productRepository;
 
     @Test
-    public void createCatigoryNotFound() throws Exception {
+    public void createCategoryNotFound() throws Exception {
         ProductRequestDto dto = new ProductRequestDto();
         {
             dto.name = "magic box";
@@ -50,12 +50,12 @@ public class ProductControllerTest {
         }
 
         mvc.perform(
-                MockMvcRequestBuilders.post("/api/products/")
+                MockMvcRequestBuilders.post("/api/v1/products/")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
+                .andExpect(status().is(HttpStatus.NOT_FOUND.value()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
@@ -68,7 +68,7 @@ public class ProductControllerTest {
         }
 
         mvc.perform(
-                MockMvcRequestBuilders.post("/api/products/")
+                MockMvcRequestBuilders.post("/api/v1/products/")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -89,7 +89,7 @@ public class ProductControllerTest {
         }
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.post("/api/products/")
+                MockMvcRequestBuilders.post("/api/v1/products/")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -123,7 +123,7 @@ public class ProductControllerTest {
 
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.put("/api/products/" + product.getId())
+                MockMvcRequestBuilders.put("/api/v1/products/" + product.getId())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -156,7 +156,7 @@ public class ProductControllerTest {
         productRepository.save(product);
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.get("/api/products/" + product.getId())
+                MockMvcRequestBuilders.get("/api/v1/products/" + product.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -192,7 +192,7 @@ public class ProductControllerTest {
         productRepository.save(product2);
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.get("/api/products/")
+                MockMvcRequestBuilders.get("/api/v1/products/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -211,7 +211,7 @@ public class ProductControllerTest {
     @Test
     public void testGetNotFound() throws Exception {
         mvc.perform(
-                MockMvcRequestBuilders.get("/api/products/2")
+                MockMvcRequestBuilders.get("/api/v1/products/2")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())

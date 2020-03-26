@@ -1,6 +1,5 @@
 package io.mohammad.apiquiz.module.cms.services;
 
-import io.mohammad.apiquiz.container.exception.BadInputException;
 import io.mohammad.apiquiz.container.exception.CmsError;
 import io.mohammad.apiquiz.container.exception.ManagedException;
 import io.mohammad.apiquiz.module.cms.dtos.SaleItemCreateRequestDto;
@@ -33,32 +32,32 @@ public class SaleItemService {
         validateProduct(requestDto.productId);
 
         SaleItem saleItem = new SaleItem();
-        Sale sale=saleRepository.getOne(requestDto.saleId);
+        Sale sale = saleRepository.getOne(requestDto.saleId);
         saleItem.setPrice(requestDto.price)
                 .setQuantity(requestDto.quantity)
                 .setSale(sale).setProduct(productRepository.getOne(requestDto.productId));
 
-        saleItem= this.saleItemRepository.save(saleItem);
+        saleItem = this.saleItemRepository.save(saleItem);
         log.info("sale Item created: {}", saleItem);
         return saleItem;
     }
 
     private void validateProduct(Long productId) {
         if (!productRepository.existsById(productId)) {
-            throw new BadInputException().addError("product","not found");
+            throw new ManagedException(CmsError.NOT_FOUND, "Product Not Found");
         }
     }
 
 
     private void validateSale(Long saleId) {
         if (!saleRepository.existsById(saleId)) {
-            throw new BadInputException().addError("saleId","not found");
+            throw new ManagedException(CmsError.NOT_FOUND, "Sale Not Found");
         }
     }
 
     public SaleItemViewDto get(Long id) throws NotFoundException {
         SaleItem saleItem = this.saleItemRepository.findById(id)
-                .orElseThrow(()->new ManagedException(CmsError.NOT_FOUND,"SaleItem not found"));
+                .orElseThrow(() -> new ManagedException(CmsError.NOT_FOUND, "SaleItem not found"));
         return new SaleItemViewDto(saleItem);
     }
 

@@ -35,7 +35,8 @@ public class ClientService {
     }
 
     public Client update(Long id, ClientRequestDto clientRequestDto) {
-        Client client = clientRepository.findById(id).orElseThrow(() -> new ManagedException(CmsError.NOT_FOUND, "Client Not Found"));
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new ManagedException(CmsError.NOT_FOUND, "Client Not Found"));
         client.setName(clientRequestDto.name)
                 .setMobile(clientRequestDto.mobile)
                 .setLastName(clientRequestDto.lastName);
@@ -44,7 +45,7 @@ public class ClientService {
 
     public List<ClientViewDto> viewAll() {
         return clientRepository.findAll().stream()
-                .map(e->new ClientViewDto(e))
+                .map(e -> new ClientViewDto(e))
                 .collect(Collectors.toList());
     }
 }

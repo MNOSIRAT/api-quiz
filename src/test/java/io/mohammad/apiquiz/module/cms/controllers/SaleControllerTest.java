@@ -43,8 +43,6 @@ class SaleControllerTest {
     @Autowired
     private SaleItemRepository saleItemRepository;
 
-
-
     @Test
     void get() throws Exception {
 
@@ -57,7 +55,7 @@ class SaleControllerTest {
         sale = saleRepository.save(sale);
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.get("/api/sales/" + sale.getId())
+                MockMvcRequestBuilders.get("/api/v1/sales/" + sale.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -98,10 +96,12 @@ class SaleControllerTest {
                 .setPrice(new BigDecimal(500))
                 .setProduct(product2);
         saleItemRepository.save(saleItem);
-        sale.getItems().add(saleItem);
+
+        em.flush();
+        em.clear();
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.get("/api/sales/" + sale.getId())
+                MockMvcRequestBuilders.get("/api/v1/sales/" + sale.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -128,7 +128,7 @@ class SaleControllerTest {
 
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.post("/api/sales/")
+                MockMvcRequestBuilders.post("/api/v1/sales/")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -155,7 +155,6 @@ class SaleControllerTest {
         client = clientRepository.save(client);
 
 
-
         Sale sale = new Sale();
         sale.setSeller("Salah")
                 .setCreationDate(Instant.now())
@@ -169,9 +168,8 @@ class SaleControllerTest {
         }
 
 
-
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.put("/api/sales/"+sale.getId())
+                MockMvcRequestBuilders.put("/api/v1/sales/" + sale.getId())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

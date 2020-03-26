@@ -1,8 +1,7 @@
 # Spring Boot Quiz!
 
 
-this repository is a Spring boot  Api which represent a simple sale system. 
-
+Restful SpringBoot demo application, represents a simple sales system.
 ## Main Modules
 there are three main modules in the system:
  1. Products Module : 	

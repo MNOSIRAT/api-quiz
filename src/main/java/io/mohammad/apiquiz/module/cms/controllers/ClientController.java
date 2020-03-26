@@ -16,7 +16,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "/api/clients")
+@RequestMapping(path = "/api/v1/clients")
 public class ClientController {
 
     private final ClientService clientService;

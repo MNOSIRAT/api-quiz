@@ -12,18 +12,10 @@ public class BadInputException extends RuntimeException {
     public BadInputException() {
     }
 
-//    public BadInputException(String message) {
-//        super(message);
-//    }
-
     public BadInputException addError(String path, String message) {
         this.errors.add(new BadInputException.FieldError(path, message));
         return this;
     }
-
-//    public static BadInputException of(String path, String message) {
-//        return (new BadInputException()).addError(path, message);
-//    }
 
     public List<FieldError> getErrors() {
         return this.errors;

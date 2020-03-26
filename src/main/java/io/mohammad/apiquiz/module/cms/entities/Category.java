@@ -1,14 +1,13 @@
 package io.mohammad.apiquiz.module.cms.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by Mohammad Nosairat on 3/24/2020.
@@ -25,7 +24,7 @@ public class Category  extends Versioned {
     @Id
     @GeneratedValue
     private Long id;
-
+    @Column(nullable = false,unique = true)
     private String name;
 
 

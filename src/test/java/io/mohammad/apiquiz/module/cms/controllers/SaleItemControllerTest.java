@@ -24,13 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestBootsrap
 class SaleItemControllerTest {
 
-
     @Autowired
     ObjectMapper objectMapper;
-
     @Autowired
     private MockMvc mvc;
-
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -78,7 +75,7 @@ class SaleItemControllerTest {
 
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.post("/api/saleitems/")
+                MockMvcRequestBuilders.post("/api/v1/saleitems/")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -132,7 +129,8 @@ class SaleItemControllerTest {
 
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.put("/api/saleitems/"+saleItem.getId())
+                MockMvcRequestBuilders.put("/api/v1/" +
+                        "saleitems/"+saleItem.getId())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

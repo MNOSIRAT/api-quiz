@@ -22,18 +22,12 @@ public class SaleViewDto {
         this.id = sale.getId();
         this.creationDate = sale.getCreationDate();
         this.total = sale.getItems().stream()
-                //.peek(i -> saleItems.add(new SaleItemViewDto(i)))
+                .peek(i -> saleItems.add(new SaleItemViewDto(i)))
                 .map(i -> i.getPrice().multiply(new BigDecimal(i.getQuantity())))
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
 
         this.seller = sale.getSeller();
-
-//        this.saleItems = sale.getItems().stream()
-//                .map(e->new SaleItemViewDto(e))
-//                .collect(Collectors.toList());
-//
-
     }
 
 }

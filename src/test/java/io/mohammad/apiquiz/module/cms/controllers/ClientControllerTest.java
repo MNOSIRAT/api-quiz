@@ -47,7 +47,7 @@ class ClientControllerTest {
         client.setName("rami").setLastName("radi").setMobile("099654");
         client = clientRepository.save(client);
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.get("/api/clients/" + client.getId())
+                MockMvcRequestBuilders.get("/api/v1/clients/" + client.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -69,7 +69,7 @@ class ClientControllerTest {
 
 
         MvcResult result = mvc.perform(
-                MockMvcRequestBuilders.get("/api/clients/")
+                MockMvcRequestBuilders.get("/api/v1/clients/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -92,7 +92,7 @@ class ClientControllerTest {
 
 
         MvcResult result= mvc.perform(
-                MockMvcRequestBuilders.post("/api/clients/")
+                MockMvcRequestBuilders.post("/api/v1/clients/")
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -124,7 +124,7 @@ class ClientControllerTest {
 
 
         MvcResult result= mvc.perform(
-                MockMvcRequestBuilders.put("/api/clients/"+client.getId())
+                MockMvcRequestBuilders.put("/api/v1/clients/"+client.getId())
                         .content(objectMapper.writeValueAsString(dto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

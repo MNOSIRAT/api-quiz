@@ -1,6 +1,5 @@
 package io.mohammad.apiquiz.module.cms.services;
 
-import io.mohammad.apiquiz.container.exception.BadInputException;
 import io.mohammad.apiquiz.container.exception.CmsError;
 import io.mohammad.apiquiz.container.exception.ManagedException;
 import io.mohammad.apiquiz.module.cms.dtos.ProductRequestDto;
@@ -10,7 +9,6 @@ import io.mohammad.apiquiz.module.cms.repositories.CategoryRepository;
 import io.mohammad.apiquiz.module.cms.repositories.ProductRepository;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -30,8 +28,6 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    @Autowired
-    CategoryService categoryservice;
 
     public Product create(ProductRequestDto productRequestDto) {
         validateCategory(productRequestDto.categoryId);
@@ -47,7 +43,7 @@ public class ProductService {
     private void validateCategory(Long categoryId) {
         boolean exist = categoryRepository.existsById(categoryId);
         if (!exist)
-            throw new BadInputException().addError("categoryId","not found");
+            throw new ManagedException(CmsError.NOT_FOUND, "Category Not Found");
     }
 
     public Product update(Long id, ProductRequestDto productRequestDto) {

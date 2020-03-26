@@ -2,27 +2,19 @@ package io.mohammad.apiquiz.module.cms.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.mohammad.apiquiz.ApiQuizApplication;
 import io.mohammad.apiquiz.module.cms.dtos.ProductRequestDto;
 import io.mohammad.apiquiz.module.cms.entities.Category;
 import io.mohammad.apiquiz.module.cms.entities.Product;
 import io.mohammad.apiquiz.module.cms.repositories.CategoryRepository;
 import io.mohammad.apiquiz.module.cms.repositories.ProductRepository;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -33,16 +25,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author Mohammad Nosairat 3/25/2020
  */
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = ApiQuizApplication.class)
-@Transactional
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+
+@TestBootsrap
 public class ProductControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
     @Autowired
-    private WebApplicationContext webApplicationContext;
     private MockMvc mvc;
 
     @Autowired
@@ -50,12 +39,6 @@ public class ProductControllerTest {
 
     @Autowired
     private ProductRepository productRepository;
-
-    @BeforeEach
-    public void setUp() {
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-
 
     @Test
     public void createCatigoryNotFound() throws Exception {
@@ -75,6 +58,7 @@ public class ProductControllerTest {
                 .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
+
     @Test
     public void createBadInput() throws Exception {
         ProductRequestDto dto = new ProductRequestDto();
@@ -117,8 +101,6 @@ public class ProductControllerTest {
         Long idFromLocation = Long.parseLong(location.substring(location.lastIndexOf("/") + 1));
         Optional<Product> p = productRepository.findById(idFromLocation);
         Assertions.assertTrue(p.isPresent());
-
-
     }
 
 

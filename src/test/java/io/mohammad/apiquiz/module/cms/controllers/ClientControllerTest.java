@@ -2,49 +2,34 @@ package io.mohammad.apiquiz.module.cms.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.mohammad.apiquiz.ApiQuizApplication;
 import io.mohammad.apiquiz.module.cms.dtos.ClientRequestDto;
 import io.mohammad.apiquiz.module.cms.entities.Client;
 import io.mohammad.apiquiz.module.cms.repositories.ClientRepository;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = ApiQuizApplication.class)
-@Transactional
+@TestBootsrap
 class ClientControllerTest {
 
     @Autowired
     ObjectMapper objectMapper;
 
     @Autowired
-    private WebApplicationContext webApplicationContext;
     private MockMvc mvc;
-
 
     @Autowired
     private ClientRepository clientRepository;
-
-    @BeforeEach
-    public void setUp() {
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-
 
     @Test
     void viewNotFound() throws Exception {
